@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./App.css";
-import Navbar from "./Composants/Navbar";
-import Compteur from "./Composants/Compteur";
+import Onglet from "./Composants/Onglet";
 
 function App() {
+  let cursorRef = useRef();
+
+  const mousePos = (e) => {
+    cursorRef.current.setAttribute(
+      "style",
+      `top: ${e.pageY - 20}px; left: ${e.pageX - 20}px;`
+    );
+  };
+
   return (
-    <div className="App">
-      <Navbar />
-      <Compteur/>
+    <div onMouseMove={mousePos} className="App">
+      <div ref={cursorRef} className="custom-cursor"></div>
+      <Onglet />
     </div>
   );
 }
